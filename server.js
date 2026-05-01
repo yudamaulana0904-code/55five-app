@@ -366,6 +366,15 @@ process.on('SIGTERM', async () => {
   if (browser) await browser.close().catch(()=>{});
   process.exit(0);
 });
+app.get("/api/data", async (req, res) => {
+  try {
+    const response = await fetch("https://api.55fiveapi.com/api/webapi/GetNoaverageEmerdList");
+    const data = await response.json();
+    res.json(data);
+  } catch (err) {
+    res.status(500).json({ error: "gagal ambil data" });
+  }
+});
 
 // ═══════════════════════════════════════════════════════════
 //  START
